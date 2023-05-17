@@ -36,7 +36,7 @@ public class MoviesManagerTest {
     }
 
     @Test
-    public void shouldFindLastThreeFilms() {
+    public void ifFindLastLessThanLimit() {
         MoviesManager manager = new MoviesManager();
         manager.addMovie("Film I");
         manager.addMovie("Film II");
@@ -66,7 +66,7 @@ public class MoviesManagerTest {
     }
 
     @Test
-    public void ifFindLastMoreThanBaseLimit() {
+    public void ifFindLastSameAsLimit() {
         MoviesManager manager = new MoviesManager(6);
         manager.addMovie("Film I");
         manager.addMovie("Film II");
@@ -75,6 +75,20 @@ public class MoviesManagerTest {
         manager.addMovie("Film V");
         manager.addMovie("Film VI");
         String[] expected = {"Film VI", "Film V", "Film IV", "Film III", "Film II", "Film I"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void ifFindLastMoreThanLimit() {
+        MoviesManager manager = new MoviesManager();
+        manager.addMovie("Film I");
+        manager.addMovie("Film II");
+        manager.addMovie("Film III");
+        manager.addMovie("Film IV");
+        manager.addMovie("Film V");
+        manager.addMovie("Film VI");
+        String[] expected = {"Film VI", "Film V", "Film IV", "Film III", "Film II"};
         String[] actual = manager.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
